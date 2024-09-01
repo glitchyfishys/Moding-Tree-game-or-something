@@ -73,3 +73,8 @@ function achievementEffect(layer, id) {
 function gridEffect(layer, id) {
 	return (gridRun(layer, 'getEffect', player[layer].grid[id], id))
 }
+
+
+function prestigeEffect(layer) {
+	return tmp[layer].effect;
+}
