@@ -121,7 +121,7 @@ addLayer("CZ", {
                 return player.points.gt(1e10);
             },
             pay: () => {player.points = player.points.sub(1e10)},
-            fullDisplay: () => `<h3>Ovedrive</h3><br> a static multiplyer <br>Effect: x25 VS gain <br>cost: 1e10 void stones`,
+            fullDisplay: () => `<h3>Overdrive</h3><br> a static multiplyer <br>Effect: x25 VS gain <br>cost: 1e10 void stones`,
             effect: new Decimal(25),
             tooltip: "a Static x25 muliplyer",
         },
@@ -164,7 +164,7 @@ addLayer("CZ", {
                 return player.points.gt(1e130);
             },
             pay: () => {player.points = player.points.sub(1e130)},
-            fullDisplay: () => `<h3>Cryonical</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 31))} VS gain <br>cost: 1e120 void stones`,
+            fullDisplay: () => `<h3>Cryonical</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 31))} VS gain <br>cost: 1e130 void stones`,
             effect: () => player.points.add(1).pow(0.1).max(1),
             tooltip: "VS ^ 0.1",
             unlocked(){return hasMilestone("DN", 3)},
