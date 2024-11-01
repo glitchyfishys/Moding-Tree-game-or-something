@@ -57,7 +57,7 @@ addLayer("CZ", {
     color: "#4BDC13",
     glowColor: "#4BDC13",
     requires: new Decimal(1e20), // Can be a function that takes requirement increases into account
-    resource: "Dynamic Crytals", // Name of prestige currency
+    resource: "Dynamic crystals", // Name of prestige currency
     baseResource: "Void Stones", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -174,7 +174,7 @@ addLayer("CZ", {
                 return player.points.gt(1e150);
             },
             pay: () => {player.points = player.points.sub(1e150)},
-            fullDisplay: () => `<h3>Meta Relay</h3><br> lower Dynamic Crytals cost based on Void Stones <br>Effect: x${ format(upgradeEffect("CZ", 32))} DC gain <br>cost: 1e150 void stones`,
+            fullDisplay: () => `<h3>Meta Relay</h3><br> lower Dynamic crystals cost based on Void Stones <br>Effect: x${ format(upgradeEffect("CZ", 32))} DC gain <br>cost: 1e150 void stones`,
             effect: () => player.points.add(1).log10().pow(0.5).max(1),
             tooltip: "LOG<sub>10</sub>(VS) ^ 0.5",
             unlocked(){return hasMilestone("DN", 3)},
@@ -704,7 +704,7 @@ addLayer("CURSE", {
     challenges: {
         11: {
             name: "make the game harder",
-            challengeDescription: "sqrt point gain<br> does a DN reset",
+            challengeDescription: "sqrt VS gain<br> does a DN reset",
             goalDescription: "reach 1e20 VS",
             rewardDisplay() {return `1e5 VS gain and remove SC1`},
             canComplete() {return player.points.gte(1e20)},
