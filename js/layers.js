@@ -472,7 +472,7 @@ addLayer("DMC", {
     componentStyles: {
         "prestige-button"() { return {'color': '#ffffff'} }
     },
-    resource: "Dynamic Magnetic Corins", // Name of prestige currency
+    resource: "Dynamic Magnetic Coils", // Name of prestige currency
     baseResource: "fish", // Name of resource prestige is based on
     baseAmount() {return decimalZero}, // Get the current amount of baseResource
     type: "custom", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -498,7 +498,7 @@ addLayer("DMC", {
     getNextAt(){
         return "never";
     },
-    prestigeButtonText() {return `reset for ${formatWhole(this.getResetGain())} Dynamic Magnetic Corins`},
+    prestigeButtonText() {return `reset for ${formatWhole(this.getResetGain())} Dynamic Magnetic Coils`},
     gainMult() {
         gain = decimalOne;
 	    if(challengeCompletions("CURSE", 15) > 0) gain = gain.mul(challengeEffect("CURSE", 15));
@@ -511,7 +511,7 @@ addLayer("DMC", {
     },
     row: 2,
     hotkeys: [
-        {key: "m", description: "m: Reset for Dynamic Magnetic Corins", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "m", description: "m: Reset for Dynamic Magnetic Coils", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.CZ.points.gt(1e30) || player.DN.points.gt(1e15) || game.progress > 3},
     upgrades: {
@@ -543,7 +543,7 @@ addLayer("DMC", {
         3: {
             requirementDescription: "10 total DMC",
             effectDescription: "DMC effect is sqared",
-            done() { return player[this.layer].total.gte(10) },
+            done() { return player[this.layer].total.gt(9.5) }, // someone got a rounding error
         },
         4: {
             requirementDescription: "100,000 total DMC",
