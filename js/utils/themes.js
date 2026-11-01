@@ -1,5 +1,5 @@
 // ************ Themes ************
-var themes = ["default", "aqua"]
+var themes = ["default", "aqua", "crimson", "coruption", "glitch"]
 
 var colors = {
 	default: {
