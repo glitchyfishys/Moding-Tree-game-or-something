@@ -90,42 +90,38 @@ addLayer("CZ", {
     layerShown(){return true},
     upgrades: {
         11: {
-            title: "Dynamical",
             canAfford: () =>{
                 return player.points.gt(1);
             },
             pay: () => {player.points = player.points.sub(1)},
-            fullDisplay: () => `Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 11))} VS gain <br>cost: 1 void stone`,
+            fullDisplay: () => `<h3>Dynamical</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 11))} VS gain <br>cost: 1 void stone`,
             effect: () => player.points.add(1).mul(15).log(6).max(1),
             tooltip: "LOG<sub>6</sub>(VS * 15)",
         },
         12: {
-            title: "Furic",
             canAfford: () =>{
                 return player.points.gt(10);
             },
             pay: () => {player.points = player.points.sub(10)},
-            fullDisplay: () => `Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 12).toFixed(2))} VS gain <br>cost: 10 void stones`,
+            fullDisplay: () => `<h3>Furic</h3><br>Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 12).toFixed(2))} VS gain <br>cost: 10 void stones`,
             effect: () => player.points.add(1).mul(150).log(1.1).max(1),
             tooltip: "LOG<sub>1.1</sub>(VS * 150)",
         },
         13: {
-            title: "Override",
             canAfford: () =>{
                 return player.points.gt(1e4);
             },
             pay: () => {player.points = player.points.sub(1e4)},
-            fullDisplay: () => `A static power <br>Effect: ^1.5 VS gain <br>cost: 1e4 void stones`,
+            fullDisplay: () => `<h3>Override</h3><br>A static power <br>Effect: ^1.5 VS gain <br>cost: 1e4 void stones`,
             effect: new Decimal(1.5),
             tooltip: "a Static 1.5 power",
         },
         14: {
-            title: "Overdrive",
             canAfford: () =>{
                 return player.points.gt(1e10);
             },
             pay: () => {player.points = player.points.sub(1e10)},
-            fullDisplay: () => `A static multiplyer <br>Effect: x25 VS gain <br>cost: 1e10 void stones`,
+            fullDisplay: () => `<h3>Overdrive</h3><br>A static multiplyer <br>Effect: x25 VS gain <br>cost: 1e10 void stones`,
             effect: new Decimal(25),
             tooltip: "a Static x25 muliplyer",
         },
@@ -164,23 +160,21 @@ addLayer("CZ", {
             unlocked(){return game.progress > 0},
         },
         31: {
-            title: "Cryonical",
             canAfford: () =>{
                 return player.points.gt(1e130);
             },
             pay: () => {player.points = player.points.sub(1e130)},
-            fullDisplay: () => `Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 31))} VS gain <br>cost: 1e130 void stones`,
+            fullDisplay: () => `<h3>Cryonical</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 31))} VS gain <br>cost: 1e130 void stones`,
             effect: () => player.points.add(1).pow(0.1).max(1),
             tooltip: "VS ^ 0.1",
             unlocked(){return hasMilestone("DN", 3)},
         },
         32: {
-            title: "Meta Relay",
             canAfford: () =>{
                 return player.points.gt(1e150);
             },
             pay: () => {player.points = player.points.sub(1e150)},
-            fullDisplay: () => `Lower Dynamic crystals cost based on Void Stones <br>Effect: x${ format(upgradeEffect("CZ", 32))} DC gain <br>cost: 1e150 void stones`,
+            fullDisplay: () => `<h3>Meta Relay</h3><br> Lower Dynamic crystals cost based on Void Stones <br>Effect: x${ format(upgradeEffect("CZ", 32))} DC gain <br>cost: 1e150 void stones`,
             effect: () => player.points.add(1).log10().pow(0.5).max(1),
             tooltip: "LOG<sub>10</sub>(VS) ^ 0.5",
             unlocked(){return hasMilestone("DN", 3)},
