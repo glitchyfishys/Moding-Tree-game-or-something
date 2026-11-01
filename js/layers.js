@@ -1,6 +1,6 @@
 
 addLayer("CZ", {
-    name: "crystallization", // This is optional, only used in a few places, If absent it just uses the layer id.
+    name: "Crystallization", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "CZ", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     branches: ["DN"],
@@ -90,50 +90,54 @@ addLayer("CZ", {
     layerShown(){return true},
     upgrades: {
         11: {
+            title: "Dynamical",
             canAfford: () =>{
                 return player.points.gt(1);
             },
             pay: () => {player.points = player.points.sub(1)},
-            fullDisplay: () => `<h3>Dynamical</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 11))} VS gain <br>cost: 1 void stone`,
+            fullDisplay: () => `Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 11))} VS gain <br>cost: 1 void stone`,
             effect: () => player.points.add(1).mul(15).log(6).max(1),
             tooltip: "LOG<sub>6</sub>(VS * 15)",
         },
         12: {
+            title: "Furic",
             canAfford: () =>{
                 return player.points.gt(10);
             },
             pay: () => {player.points = player.points.sub(10)},
-            fullDisplay: () => `<h3>Furic</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 12).toFixed(2))} VS gain <br>cost: 10 void stones`,
+            fullDisplay: () => `Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 12).toFixed(2))} VS gain <br>cost: 10 void stones`,
             effect: () => player.points.add(1).mul(150).log(1.1).max(1),
             tooltip: "LOG<sub>1.1</sub>(VS * 150)",
         },
         13: {
+            title: "Override",
             canAfford: () =>{
                 return player.points.gt(1e4);
             },
             pay: () => {player.points = player.points.sub(1e4)},
-            fullDisplay: () => `<h3>Overide</h3><br> a static power <br>Effect: ^1.5 VS gain <br>cost: 1e4 void stones`,
+            fullDisplay: () => `A static power <br>Effect: ^1.5 VS gain <br>cost: 1e4 void stones`,
             effect: new Decimal(1.5),
             tooltip: "a Static 1.5 power",
         },
         14: {
+            title: "Overdrive",
             canAfford: () =>{
                 return player.points.gt(1e10);
             },
             pay: () => {player.points = player.points.sub(1e10)},
-            fullDisplay: () => `<h3>Overdrive</h3><br> a static multiplyer <br>Effect: x25 VS gain <br>cost: 1e10 void stones`,
+            fullDisplay: () => `A static multiplyer <br>Effect: x25 VS gain <br>cost: 1e10 void stones`,
             effect: new Decimal(25),
             tooltip: "a Static x25 muliplyer",
         },
         21: {
-            title: "duolight",
+            title: "Duolight",
             cost: new Decimal(1),
-            description: "just removes SC2 (have more than 1 DC before you buy)",
-            tooltip: "no more SC2",
+            description: "Just removes SC2 (have more than 1 DC before you buy)",
+            tooltip: "No more SC2",
             unlocked(){return game.progress > 0},
         },
         22: {
-            title: "norix arteri",
+            title: "Norix Arteri",
             cost: new Decimal(100),
             description: "muliply DC gain by its amount",
             effect() {return player[this.layer].points.pow(0.8).max(1).min("1e10000")},
@@ -142,7 +146,7 @@ addLayer("CZ", {
             unlocked(){return game.progress > 0},
         },
         23: {
-            title: "how lazy are you?",
+            title: "How lazy are you?",
             cost: new Decimal(1000),
             description: "the first 4 upgrades dont reset",
             effect() {return new Decimal(1)},
@@ -151,30 +155,32 @@ addLayer("CZ", {
             unlocked(){return game.progress > 0},
         },
         24: {
-            title: "you must be if you buy this? or buymax isn't working",
+            title: "You must be if you buy this? or buymax isn't working",
             cost: new Decimal(1e10),
-            description: "the rebuyable does not reset",
+            description: "The rebuyable does not reset",
             effect() {return new Decimal(1)},
             effectDisplay(){return "unlocked"},
             tooltip: "",
             unlocked(){return game.progress > 0},
         },
         31: {
+            title: "Cryonical",
             canAfford: () =>{
                 return player.points.gt(1e130);
             },
             pay: () => {player.points = player.points.sub(1e130)},
-            fullDisplay: () => `<h3>Cryonical</h3><br> Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 31))} VS gain <br>cost: 1e130 void stones`,
+            fullDisplay: () => `Void Stone gain based on its value<br>Effect: x${ format(upgradeEffect("CZ", 31))} VS gain <br>cost: 1e130 void stones`,
             effect: () => player.points.add(1).pow(0.1).max(1),
             tooltip: "VS ^ 0.1",
             unlocked(){return hasMilestone("DN", 3)},
         },
         32: {
+            title: "Meta Relay",
             canAfford: () =>{
                 return player.points.gt(1e150);
             },
             pay: () => {player.points = player.points.sub(1e150)},
-            fullDisplay: () => `<h3>Meta Relay</h3><br> lower Dynamic crystals cost based on Void Stones <br>Effect: x${ format(upgradeEffect("CZ", 32))} DC gain <br>cost: 1e150 void stones`,
+            fullDisplay: () => `Lower Dynamic crystals cost based on Void Stones <br>Effect: x${ format(upgradeEffect("CZ", 32))} DC gain <br>cost: 1e150 void stones`,
             effect: () => player.points.add(1).log10().pow(0.5).max(1),
             tooltip: "LOG<sub>10</sub>(VS) ^ 0.5",
             unlocked(){return hasMilestone("DN", 3)},
@@ -182,7 +188,7 @@ addLayer("CZ", {
     },
     buyables: {
         11: {
-            title() {return (hasMilestone("DN", 2) ? ((challengeCompletions("CURSE", 15) > 0) ? "4.4x": "2.2x") : "double") + " Void Stones gain"},
+            title() {return (hasMilestone("DN", 2) ? ((challengeCompletions("CURSE", 15) > 0) ? "4.4x": "2.2x") : "Double") + " Void Stones gain"},
             cost(amount) { return Decimal.pow(3,amount).mul(1e3) },
             display() { return `cost: ${format(this.cost())} Void Stones <br> x${format(buyableEffect("CZ", 11))} VS gain` },
             canAfford() { return player.points.gte(this.cost()) && getBuyableAmount(this.layer, this.id).lt(this.limit()); },
@@ -295,7 +301,7 @@ addLayer("DN", {
     milestones: {
         0: {
             requirementDescription: "1 total DN",
-            effectDescription: "autobuy CZ rebuyable and it works slowly",
+            effectDescription: "Autobuy CZ rebuyable and it works slowly",
             done() { return player[this.layer].total.gte(1) },
             toggles: [["CZ", "autoRB"]],
         },
@@ -311,7 +317,7 @@ addLayer("DN", {
         },
         3: {
             requirementDescription: "25 total DN",
-            effectDescription: "umm 2 new upgrades?",
+            effectDescription: "Umm 2 new upgrades?",
             done() { return player[this.layer].total.gte(25) },
         },
         4: {
@@ -325,7 +331,7 @@ addLayer("DN", {
 
 
 addLayer("INFINITY", {
-    name: "omaga", // This is optional, only used in a few places, If absent it just uses the layer id.
+    name: "Omaga", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "INF", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     branches: ["DMC"],
@@ -388,17 +394,17 @@ addLayer("INFINITY", {
     layerShown(){return player.points.gt(1e200) || game.progress > 2},
     upgrades: {
         11: {
-            title: "<i>i am speed</i>",
+            title: "<i>I am speed</i>",
             cost: new Decimal(3),
-            description: "keep total DN made and remove SC4",
+            description: "Keep total DN made and remove SC4",
             effect() {return player[this.layer].total.pow(0.05)},
             effectDisplay(){return `annihilated SC4`},
             tooltip: "",
         },
         12: {
-            title: "<i>i am not speed</i>",
+            title: "<i>I am not speed</i>",
             cost: new Decimal(50),
-            description: "multiples OR gain by 5 for every Cursed challenge you are in",
+            description: "Multiples OR gain by 5 for every Cursed challenge you are in",
             effect() {return Decimal.pow(5,challengesIN())},
             effectDisplay(){return `x${format(this.effect())} OR gain`},
             tooltip: "",
@@ -408,18 +414,18 @@ addLayer("INFINITY", {
     milestones: {
         0: {
             requirementDescription: "1 total OR",
-            effectDescription: "autobuy CZ upgrades and DN MS1 is faster",
+            effectDescription: "Autobuy CZ upgrades and DN MS1 is faster",
             done() { return player[this.layer].total.gte(1) },
             toggles: [["CZ", "autoUG"]],
         },
         1: {
             requirementDescription: "2 total OR",
-            effectDescription: "keep DN Milestones",
+            effectDescription: "Keep DN Milestones",
             done() { return player[this.layer].total.gte(2) },
         },
         2: {
             requirementDescription: "3 total OR",
-            effectDescription() {return `total DN multiples VS gain<br>Effect: ${format(player.DN.total.pow(3))}`},
+            effectDescription() {return `Total DN multiples VS gain<br>Effect: ${format(player.DN.total.pow(3))}`},
             done() { return player[this.layer].total.gte(3) },
         },
         3: {
@@ -434,7 +440,7 @@ addLayer("INFINITY", {
         },
         5: {
             requirementDescription: "1000 total OR",
-            effectDescription: "autobuy DN upgrades",
+            effectDescription: "Autobuy DN upgrades",
             done() { return player[this.layer].total.gte(1000) },
             toggles: [["DN", "autoUG"]],
         },
@@ -496,7 +502,7 @@ addLayer("DMC", {
         return gain;
     },
     getNextAt(){
-        return "never";
+        return "NEVER";
     },
     prestigeButtonText() {return `reset for ${formatWhole(this.getResetGain())} Dynamic Magnetic Coils`},
     gainMult() {
@@ -516,9 +522,9 @@ addLayer("DMC", {
     layerShown(){return player.CZ.points.gt(1e30) || player.DN.points.gt(1e15) || game.progress > 3},
     upgrades: {
         11: {
-            title: "forever",
+            title: "Forever",
             cost: new Decimal(50),
-            description: "unlock everlasting Milestones",
+            description: "Unlock everlasting Milestones",
             effect() {return player[this.layer].total.pow(0.5)},
             effectDisplay(){return `unlocked`},
             tooltip: "",
@@ -527,12 +533,12 @@ addLayer("DMC", {
     milestones: {
         0: {
             requirementDescription: "1 total DMC",
-            effectDescription: "keep INF Milestones",
+            effectDescription: "Keep INF Milestones",
             done() { return player[this.layer].total.gte(1) },
         },
         1: {
             requirementDescription: "2 total DMC",
-            effectDescription: "keep INF upgrades",
+            effectDescription: "Keep INF upgrades",
             done() { return player[this.layer].total.gte(2) },
         },
         2: {
@@ -547,7 +553,7 @@ addLayer("DMC", {
         },
         4: {
             requirementDescription: "100,000 total DMC",
-            effectDescription: "auto gain DN",
+            effectDescription: "Auto gain DN",
             done() { return player[this.layer].total.gte(1e5) },
         },
     },
@@ -614,12 +620,12 @@ addLayer("VX", {
     milestones: {
         0: {
             requirementDescription: "1 Chaos Core",
-            effectDescription: "/ point gain by 1e5",
+            effectDescription: "Divide VS gain by 1e5",
             done() { return player[this.layer].points.gte(1) },
         },
         1: {
             requirementDescription: "2 Chaos Cores",
-            effectDescription: "more everlasting milestones",
+            effectDescription: "More everlasting milestones",
             done() { return player[this.layer].points.gte(2)},
         },
         2: {
@@ -644,7 +650,7 @@ addLayer("VX", {
         },
         6: {
             requirementDescription: "20 Chaos Cores",
-            effectDescription: "double VX effect",
+            effectDescription: "Double VX effect",
             done() { return player[this.layer].points.gte(20)},
         },
         7: {
@@ -654,22 +660,22 @@ addLayer("VX", {
         },
         8: {
             requirementDescription: "100 Chaos Cores",
-            effectDescription: "gain more OR and DMC, it is auto gained too",
+            effectDescription: "Gain more OR and DMC, it is auto gained too",
             done() { return player[this.layer].points.gte(100)},
         },
         9: {
             requirementDescription: "250 Chaos Cores",
-            effectDescription: "lower SC8 by Chaos Cores, gain more CC and double effect again, does not reset anything and is auto gained ",
+            effectDescription: "Lower SC8 by Chaos Cores, gain more CC and double effect again, does not reset anything and is auto gained ",
             done() { return player[this.layer].points.gte(250)},
         },
         10: {
             requirementDescription: "10000 Chaos Cores",
-            effectDescription: "triple the soft cap rate, also buys max",
+            effectDescription: "Triple the soft cap rate, also buys max",
             done() { return player[this.layer].points.gte(10000)},
         },
         11: {
             requirementDescription: "1e20 Chaos Cores",
-            effectDescription: "remove <i>all</i> softcaps and uncap DMC gain",
+            effectDescription: "Remove <i>all</i> softcaps and uncap DMC gain",
             done() { return player[this.layer].points.gte(1e20)},
         },
         12: {
@@ -703,9 +709,9 @@ addLayer("CURSE", {
     },
     challenges: {
         11: {
-            name: "make the game harder",
-            challengeDescription: "sqrt VS gain<br> does a DN reset",
-            goalDescription: "reach 1e20 VS",
+            name: "Make the game harder",
+            challengeDescription: "SQRT VS gain<br> Does a DN reset",
+            goalDescription: "Reach 1e20 VS",
             rewardDisplay() {return `1e5 VS gain and remove SC1`},
             canComplete() {return player.points.gte(1e20)},
             rewardEffect() {return new Decimal(1e5)},
@@ -715,9 +721,9 @@ addLayer("CURSE", {
             style:{backgroundColor: "#dB0013", color: "white"},
         },
         12: {
-            name: "make the game EVEN harder",
-            challengeDescription: "^.2 DC gain<br> does a INF reset",
-            goalDescription: "reach 1e50 VS",
+            name: "Make the game EVEN harder",
+            challengeDescription: "^0.2 DC gain<br> Does a INF reset",
+            goalDescription: "Reach 1e50 VS",
             unlocked() {return game.progress > 2},
             rewardDisplay() {return `1e5 DC gain and lower SC3`},
             canComplete() {return player.points.gte(1e50)},
@@ -729,9 +735,9 @@ addLayer("CURSE", {
             countsAs: [11],
         },
         13: {
-            name: "make the game EVENER harder",
-            challengeDescription: "^0.7 DN gain<br> does a INF reset",
-            goalDescription: "reach 1.79e308 VS",
+            name: "Make the game EVENER harder",
+            challengeDescription: "^0.7 DN gain<br> Does a INF reset",
+            goalDescription: "Reach 1.79e308 VS",
             unlocked() {return game.progress > 2},
             rewardDisplay() {return `1e5 DN gain`},
             canComplete() {return player.points.gte(Decimal.dNumberMax)},
@@ -743,11 +749,11 @@ addLayer("CURSE", {
             countsAs: [11,12],
         },
         14: {
-            name: "make the game EVEN harderest",
-            challengeDescription: "^0.9 VS, DC,DN gain<br> does a INF reset",
-            goalDescription: "reach 1e1000 VS",
+            name: "Make the game EVEN harderest",
+            challengeDescription: "^0.9 VS, DC,DN gain<br> Does a INF reset",
+            goalDescription: "Reach 1e1000 VS",
             unlocked() {return game.progress > 2},
-            rewardDisplay() {return `multiply OR gain by its amount and square DZ rebuyable cap Effect: x${format(this.rewardEffect())}, DMC also slightly effects VS gain x${format(player.DMC.points.add(1).log10().pow(5).max(1))}`},
+            rewardDisplay() {return `Multiply OR gain by its amount and square DZ rebuyable cap Effect: x${format(this.rewardEffect())}, DMC also slightly effects VS gain x${format(player.DMC.points.add(1).log10().pow(5).max(1))}`},
             canComplete() {return player.points.gte("1e1000")},
             rewardEffect() {return player.INFINITY.points.pow(0.2).max(1)},
             onEnter() {
@@ -759,9 +765,9 @@ addLayer("CURSE", {
             countsAs: [11,12,13],
         },
         15: {
-            name: "make the game EVENEREST hardererest",
-            challengeDescription: "^0.1 DC,DN gain<br> does a DMC reset",
-            goalDescription: "reach 1e1000 VS",
+            name: "Make the game EVENEREST hardererest",
+            challengeDescription: "^0.1 DC,DN gain<br> Does a DMC reset",
+            goalDescription: "Reach 1e1000 VS",
             unlocked() {return game.progress > 4},
             rewardDisplay() {return `DMC gain by OR amount and double DZ rebuyable effect perpurchase Effect: x${format(this.rewardEffect())}`},
             canComplete() {return player.points.gte("1e1000")},
@@ -778,7 +784,7 @@ addLayer("CURSE", {
 });
 
 addLayer("EMS", {
-    name: "everlasting milestones", // This is optional, only used in a few places, If absent it just uses the layer id.
+    name: "Everlasting Milestones", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "EMS", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
@@ -796,36 +802,36 @@ addLayer("EMS", {
     },
     milestones: {
         0: {
-            requirementDescription: "reach 1e1111 Void Stones",
+            requirementDescription: "Reach 1e1111 Void Stones",
             effectDescription: "/1.5 OR cost exponent and lower SC6, nut lower DN gain from DMC",
             done() { return player.points.gte("1e1111") },
         },
         1: {
-            requirementDescription: "reach 1e900 Void Stones without Omaga Relics",
-            effectDescription: "lower SC3 and SC5",
+            requirementDescription: "Reach 1e900 Void Stones without Omaga Relics",
+            effectDescription: "Lower SC3 and SC5",
             done() { return player.points.gte("1e900") && player.INFINITY.points.eq(0)},
         },
         2: {
-            requirementDescription: "reach 1e16000 Void Stones",
-            effectDescription: "lower DN cost soft cap",
+            requirementDescription: "Reach 1e16000 Void Stones",
+            effectDescription: "Lower DN cost soft cap",
             done() { return player.points.gte("1e16000") },
             unlocked() {return hasMilestone("VX", 1)},
         },
         3: {
             requirementDescription: "reach 1e26800 Void Stones",
-            effectDescription: "gain more Chaos Core",
+            effectDescription: "Gain more Chaos Core",
             done() { return player.points.gte("1e26800") },
             unlocked() {return hasMilestone("VX", 1)},
         },
         4: {
-            requirementDescription: "reach 1e75000 Void Stones",
-            effectDescription: "gain even more Chaos Core",
+            requirementDescription: "Reach 1e75000 Void Stones",
+            effectDescription: "Gain even more Chaos Core",
             done() { return player.points.gte("1e75000") },
             unlocked() {return hasMilestone("VX", 1)},
         },
         5: {
-            requirementDescription: "reach 1e100000 Void Stones",
-            effectDescription: "gain way more Chaos Core and imporve its effect",
+            requirementDescription: "Reach 1e100000 Void Stones",
+            effectDescription: "Gain way more Chaos Core and imporve its effect",
             done() { return player.points.gte("1e100000") },
             unlocked() {return hasMilestone("VX", 1)},
         },
@@ -833,7 +839,7 @@ addLayer("EMS", {
 });
 
 addLayer("A", {
-    name: "Achevments", // This is optional, only used in a few places, If absent it just uses the layer id.
+    name: "Achievements", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "A", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
@@ -846,59 +852,58 @@ addLayer("A", {
     layerShown(){return true},
     achievements: {
         11: {
-            name: "click the button up there 10 times",
+            name: "Click the button up there 10 times",
             done() {return player.pointlessclicks.gte(10)},
-            tooltip: "you can gain points",
+            tooltip: "You can gain points",
         },
         12: {
-            name: "how big is 100?",
-            done() {return player.points.gte(100)},
-            tooltip: "",
+            name: "How big is 100?",
+            done() {return player.points.gte(100)}
         },
         13: {
-            name: "why did you leave",
+            name: "Why did you leave?",
             done() {return player.offTime?.remain > 10},
             tooltip: ":(",
         },
         14: {
-            name: () => `${ hasAchievement("A", 14) ? "reach 1e20 Void Stones, get soft capped lol " : "reach 1e20 Void Stones"}`,
+            name: () => `${ hasAchievement("A", 14) ? "Reach 1e20 Void Stones, get soft capped lol " : "Reach 1e20 Void Stones"}`,
             done() {return player.points.gte(1e20)},
-            tooltip: "oh should have known",
+            tooltip: "Oh should have known",
         },
         15: {
-            name: () => `${ hasAchievement("A", 14) ? "reach 1e100 Void Stones, ah yes a new layer" : "reach 1e100 Void Stones"}`,
+            name: () => `${ hasAchievement("A", 14) ? "Reach 1e100 Void Stones, ah yes a new layer" : "Reach 1e100 Void Stones"}`,
             done() {return player.points.gte(1e100)},
-            tooltip: "oh at 1e100",
+            tooltip: "Oh at 1e100",
         },
         21: {
-            name: () => `i can get automation`,
+            name: () => `I can get automation`,
             done() {return player.DN.total.gte(1)},
             tooltip: "1 number?",
         },
         22: {
-            name: () => `big number`,
+            name: () => `Big number`,
             done() {return player.INFINITY.total.gte(1)},
             tooltip: "INFINITY",
         },
         23: {
-            name: () => `im CURSED`,
+            name: () => `Im CURSED`,
             done() {return challengeCompletions("CURSE", 12)},
             tooltip: "YOU ARE NOW CURSED",
         },
         24: {
-            name: () => `magnetic`,
+            name: () => `Magnetic`,
             done() {return player.DMC.total.gte(1)},
             tooltip: "I am the storm that is approaching",
         },
         25: {
-            name: () => `good luck`,
+            name: () => `Good luck`,
             done() {return player.VX.total.gte(1)},
             tooltip: "CHAOS CHAOS",
         },
     },
     clickables: {
         11: {
-            display() {return `pointless clicks ${player.pointlessclicks.neq(0) ? player.pointlessclicks.gt(1) ? `and yet you have clicked it ${player.pointlessclicks.toFixed(0)} times` : "and yet you have clicked it" : ""}`},
+            display() {return `Pointless clicks ${player.pointlessclicks.neq(0) ? player.pointlessclicks.gt(1) ? `and yet you have clicked it ${player.pointlessclicks.toFixed(0)} times` : "and yet you have clicked it" : ""}`},
             canClick() {return true},
             onClick() {player.pointlessclicks = player.pointlessclicks.add(1)},
         }
