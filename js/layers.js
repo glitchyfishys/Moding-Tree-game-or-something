@@ -325,7 +325,7 @@ addLayer("DN", {
 
 
 addLayer("INFINITY", {
-    name: "Omaga", // This is optional, only used in a few places, If absent it just uses the layer id.
+    name: "Omega", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "INF", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     branches: ["DMC"],
@@ -359,7 +359,7 @@ addLayer("INFINITY", {
     color: "orange",
     glowColor: "orange",
     requires: new Decimal(Number.MAX_VALUE), // Can be a function that takes requirement increases into account
-    resource: "Omaga Relics", // Name of prestige currency
+    resource: "Omega Relics", // Name of prestige currency
     baseResource: "void stones", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -383,7 +383,7 @@ addLayer("INFINITY", {
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "i", description: "i: Reset for Omaga Relics", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "i", description: "i: Reset for Omega Relics", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.points.gt(1e200) || game.progress > 2},
     upgrades: {
@@ -797,11 +797,11 @@ addLayer("EMS", {
     milestones: {
         0: {
             requirementDescription: "Reach 1e1111 Void Stones",
-            effectDescription: "/1.5 OR cost exponent and lower SC6, nut lower DN gain from DMC",
+            effectDescription: "/1.5 OR cost exponent and lower SC6, but lower DN gain from DMC",
             done() { return player.points.gte("1e1111") },
         },
         1: {
-            requirementDescription: "Reach 1e900 Void Stones without Omaga Relics",
+            requirementDescription: "Reach 1e900 Void Stones without Omega Relics",
             effectDescription: "Lower SC3 and SC5",
             done() { return player.points.gte("1e900") && player.INFINITY.points.eq(0)},
         },
