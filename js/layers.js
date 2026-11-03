@@ -286,7 +286,7 @@ addLayer("DN", {
             title: "<sub>small</sub>",
             cost: new Decimal(5),
             description: "Gain a small power to VS based on total DN",
-            effect() {return player[this.layer].total.pow(0.05).min(15)},
+            effect() {return player[this.layer].total.pow(0.05)},
             effectDisplay(){return `VS ^${format(this.effect())}`},
             tooltip: "",
         },
