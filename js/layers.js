@@ -261,7 +261,7 @@ addLayer("DN", {
         gain = new Decimal(1);
         if(challengeCompletions("CURSE", 13) > 0) gain = gain.mul(challengeEffect("CURSE", 13));
 
-        gain = gain.mul(prestigeEffect("DMC")).min(10000);
+        gain = gain.mul(prestigeEffect("DMC")).min(hasMilestone("EMS", 0) ? 1e5 : 1e15);
 	    if(inChallenge("CURSE", 13)) gain = gain.pow(0.7);
 	    if(inChallenge("CURSE", 14)) gain = gain.pow(0.9);
         if(inChallenge("CURSE", 15)) gain = gain.pow(0.1);
